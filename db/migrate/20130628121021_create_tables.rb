@@ -1,30 +1,30 @@
 class CreateTables < ActiveRecord::Migration
   def change
-    create_table :users  do |t|
+    create_table :users do |t|
       t.string :name, :null => false
       t.string :login, :null => false
       t.string :password_hash, :null => false
       t.timestamps
     end
-    create_table :rounds  do |t|
-      t.belongs_to :deck
-      t.belongs_to :user
+    create_table :rounds do |t|
+      t.references :deck
+      t.references :user
       t.timestamps
     end
-    create_table :guesses  do |t|
+    create_table :guesses do |t|
       t.boolean :correct
-      t.belongs_to :card
-      t.belongs_to :round
+      t.references :card
+      t.references :round
       t.timestamps
     end
-    create_table :decks  do |t|
-      t.string :name, :null => false
+    create_table :decks do |t|
+      t.string :name
       t.timestamps
     end
-    create_table :cards  do |t|
+    create_table :cards do |t|
       t.string :question, :null => false
       t.string :answer, :null => false
-      t.belongs_to :deck
+      t.references :deck
       t.timestamps
     end
   end

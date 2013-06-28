@@ -5,13 +5,14 @@ def import_deck(file)
       deck_array << line.chomp
     end
   end
+  @cards = []
   deck_array.each_slice(2) do |slice|
-    @cards << Card.new({question: slice.first, answer: slice.last})
+    @cards << Card.create({question: slice.first, answer: slice.last})
   end
   p @cards
-  p @ruby_deck = Deck.new({name: "Ruby Terms"})
+  p @ruby_deck = Deck.create({name: "Ruby Terms"})
   @cards.each do |card|
-    @ruby_deck << card
+    @ruby_deck.cards << card
   end
   p @ruby_deck
 end
