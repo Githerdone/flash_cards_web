@@ -22,7 +22,6 @@ get "/:id" do
 end
 
 get "/decks/:id" do
- puts "I got here" * 80
-puts params
-
+   @deck = Deck.find(params[:id])
+  erb :game
 end
