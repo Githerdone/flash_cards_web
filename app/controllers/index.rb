@@ -11,3 +11,18 @@ get '/' do
 #     end
 #   end  erb :index
 end
+
+
+get "/:id" do
+#find user by id.
+#pass as an instance var
+  @user = User.find(params[:id])
+  @decks = Deck.all
+  erb :user_profile
+end
+
+get "/decks/:id" do
+ puts "I got here" * 80
+puts params
+
+end
