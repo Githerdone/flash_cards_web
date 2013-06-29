@@ -1,21 +1,13 @@
 get '/' do
 
-#   login(params[:email])
+  erb :index
 
-# def login
-#     @user = User.find_by_email(params[:email])
-#     if @user.password == params[:password]
-#       give_token
-#     else
-#       redirect_to home_url
-#     end
-#   end  erb :index
 end
 
 
 get "/user/:id" do
-#find user by id.
-#pass as an instance var
+  #find user by id.
+  #pass as an instance var
   @user = User.find(params[:id])
   @decks = Deck.all
   erb :user_profile
@@ -40,4 +32,19 @@ post "/play" do
 
 
   redirect "deck/#{@deck.id}"
+end
+
+
+post '/profile' do
+  if params[:user].length == 3
+    @user = User.create(params[:user])
+    erb :profile
+  else
+    @user = User.find_by_login(params[:user][:login])
+    if @user
+      login(params[:user]) 
+    else
+      redirect to('/')
+    end
+  end
 end
