@@ -2,7 +2,7 @@ helpers do
   def login(params)
     if @user.password == params[:password]
       session[:user] = @user.id
-      erb :profile
+      redirect to("/user/#{@user.id}")
     else
       erb :index
     end

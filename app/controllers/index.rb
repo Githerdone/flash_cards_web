@@ -38,7 +38,7 @@ end
 post '/profile' do
   if params[:user].length == 3
     @user = User.create(params[:user])
-    erb :profile
+    redirect "/user/#{@user.id}"
   else
     @user = User.find_by_login(params[:user][:login])
     if @user
@@ -47,4 +47,9 @@ post '/profile' do
       redirect to('/')
     end
   end
+end
+
+get '/logout' do
+  session.clear
+  redirect to('/')
 end
