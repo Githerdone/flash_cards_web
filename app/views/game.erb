@@ -1,13 +1,21 @@
 <h2>This is where you will play the game</h2>
+<<<<<<< HE
 
 <%= @current_card.question %>
 
-  <form action="/play" method="POST">
+
+<form action="/play" method="POST">
+
+<div class='card'>
+  <% @deck.cards.each do |card| %>
+  <form class='form'action="/round/<%=card.id%>" method="POST">
+    <br>
+    <%= card.question %>
+    <br>
     <input type="text" name="user_input" placeholder="your answer" required>
     <input type="hidden" name="card_id" value="<%= @current_card.id %>">
     <input type="submit" value="Guess!">
   </form>
 
-<%= erb :_correct, :layout => false %>
-
-<%= erb :_wrong, :layout => false %>
+  <% end %>
+</div>

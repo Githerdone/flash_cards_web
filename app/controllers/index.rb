@@ -6,8 +6,13 @@ end
 
 
 get "/user/:id" do
+
   #find user by id.
   #pass as an instance var
+
+#find user by id.
+#pass as an instance var
+  #find by id
   @user = User.find(params[:id])
   @decks = Deck.all
   erb :user_profile
@@ -16,8 +21,8 @@ end
 get "/deck/:id" do
   puts "5" * 90
   p params
-  deck = Deck.find(params[:id])
-  @current_card = deck.shuffle.sample
+  @deck = Deck.find(params[:id])
+  # @current_card = deck.shuffle
 
   erb :game
 end
@@ -30,26 +35,16 @@ post "/play" do
     erb :_correct
   else
     erb :_wrong
+post "/round/:current_card_id" do
+  puts params
+  current_guess = params[:user_input]
+  current_card = Card.find(params[:current_card_id])
+
+  if current_guess.downcase == current_card.answer.downcase
+    erb :_success #render partial success
+    redirect "deck/"
+  else
+    erb :_failure #render partial failure @current_card.answer
   end
   redirect "deck/#{@current_card.deck.id}"
-end
-
-
-post '/profile' do
-  if params[:user].length == 3
-    @user = User.create(params[:user])
-    redirect "/user/#{@user.id}"
-  else
-    @user = User.find_by_login(params[:user][:login])
-    if @user
-      login(params[:user]) 
-    else
-      redirect to('/')
-    end
-  end
-end
-
-get '/logout' do
-  session.clear
-  redirect to('/')
 end
