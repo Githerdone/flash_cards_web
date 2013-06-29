@@ -1,1 +1,17 @@
 <h1>Welcome to Flash Cards</h1>
+
+  <p>Create an account</p>
+  <form name="create_account" action="/profile" method="post">
+    <input type="text" name="user[name]" placeholder="Your name">
+    <input type="text" name="user[login]" placeholder="Your email">
+    <input type="text" name="user[password]" placeholder="Your password">
+    <input type="submit" value="Create Account">
+  </form>
+
+  <p>Login</p>
+  <form name="user" action="/profile" method="post">
+    <input type="text" name="user[login]" placeholder="Your email">
+    <input type="text" name="user[password]" placeholder="Your password">
+    <input type="submit" value="Login">
+  </form>
+
