@@ -14,6 +14,7 @@ get "/user/:id" do
 end
 
 get "/deck/:id" do
+  puts "5" * 90
   p params
   deck = Deck.find(params[:id])
   @current_card = deck.shuffle.sample
@@ -22,16 +23,15 @@ get "/deck/:id" do
 end
 
 post "/play" do
-  current_guess = params[:user_input]
-
+  card_object = params[:card_id]
+   @current_card = Card.find(card_object)
+   current_guess = params[:user_input]
   if current_guess.downcase == @current_card.answer.downcase
-    #render partial success
+    erb :_correct
   else
-    #render partial failure @current_card.answer
+    erb :_wrong
   end
-
-
-  redirect "deck/#{@deck.id}"
+  redirect "deck/#{@current_card.deck.id}"
 end
 
 
