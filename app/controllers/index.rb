@@ -35,6 +35,9 @@ post "/play" do
     erb :_correct
   else
     erb :_wrong
+  end
+end
+
 post "/round/:current_card_id" do
   puts params
   current_guess = params[:user_input]
