@@ -19,11 +19,8 @@ get "/user/:id" do
 end
 
 get "/deck/:id" do
-  puts "5" * 90
-  p params
   @deck = Deck.find(params[:id])
-  # @current_card = deck.shuffle
-
+  @current_card = @deck.cards.sample
   erb :game
 end
 
